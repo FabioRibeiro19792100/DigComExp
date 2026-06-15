@@ -47,6 +47,7 @@ const UI_TEXT = {
     weekKick: (week) => `Semana ${week}`,
     phaseKick: (week, theme, phase) => `Semana ${week} · ${theme} · ${phase}`,
     noteIndicator: "✎ nota",
+    tapToAddNote: "Toque para adicionar nota da semana",
   },
   en: {
     localeLabel: "EN",
@@ -94,6 +95,7 @@ const UI_TEXT = {
     weekKick: (week) => `Week ${week}`,
     phaseKick: (week, theme, phase) => `Week ${week} · ${theme} · ${phase}`,
     noteIndicator: "✎ note",
+    tapToAddNote: "Tap to add a weekly note",
   },
 };
 
