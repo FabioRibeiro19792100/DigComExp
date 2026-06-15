@@ -79,6 +79,10 @@ const APP_OVERRIDES = `
   -webkit-overflow-scrolling:touch;
 }
 
+.prog-mobile{
+  display:none;
+}
+
 .prog-grid{
   min-width:880px;
 }
@@ -178,21 +182,181 @@ const APP_OVERRIDES = `
     opacity:.18;
   }
 
+  .prog-wrap{
+    overflow-x:visible;
+  }
+
   .prog-grid{
-    min-width:700px;
+    display:none;
   }
 
-  .col-hd{
-    padding:14px 12px;
+  .prog-mobile{
+    display:block;
   }
 
-  .gcell{
-    min-height:96px;
-    padding:14px 12px;
+  .mobile-phase + .mobile-phase{
+    margin-top:26px;
   }
 
-  .cell-title{
-    font-size:12.5px;
+  .mobile-phase-head{
+    border:1px solid color-mix(in srgb,var(--phc) 16%,rgba(0,0,0,.06));
+    background:linear-gradient(180deg,color-mix(in srgb,var(--phc) 6%,#fff),#fff 72%);
+    border-radius:12px;
+    padding:16px 14px;
+    margin-bottom:14px;
+    box-shadow:0 10px 24px -26px color-mix(in srgb,var(--phc) 38%,#000);
+  }
+
+  .mobile-phase-name{
+    display:block;
+    font-family:var(--display);
+    font-weight:700;
+    font-size:16px;
+    letter-spacing:-.02em;
+    color:var(--phc);
+  }
+
+  .mobile-phase-weeks{
+    display:block;
+    margin-top:4px;
+    font-family:var(--mono);
+    font-size:10px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--phc);
+    opacity:.75;
+  }
+
+  .mobile-phase-desc{
+    margin-top:8px;
+    font-size:13px;
+    line-height:1.5;
+    color:var(--muted);
+  }
+
+  .mobile-week + .mobile-week{
+    margin-top:14px;
+  }
+
+  .mobile-week-head{
+    width:100%;
+    border:0;
+    background:#f5f5f5;
+    border-radius:12px;
+    padding:14px 14px 12px;
+    text-align:left;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+  }
+
+  .mobile-week-main{
+    min-width:0;
+  }
+
+  .mobile-week-title{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-family:var(--display);
+    font-weight:600;
+    font-size:14px;
+    letter-spacing:-.01em;
+    color:var(--ink);
+  }
+
+  .mobile-week-dot{
+    width:8px;
+    height:8px;
+    border-radius:999px;
+    background:var(--pc);
+    flex-shrink:0;
+  }
+
+  .mobile-week-note{
+    margin-top:5px;
+    font-size:12px;
+    color:var(--muted);
+  }
+
+  .mobile-week-grid{
+    display:grid;
+    gap:10px;
+    margin-top:10px;
+  }
+
+  .mobile-day-card{
+    width:100%;
+    border:1px solid rgba(0,0,0,.07);
+    border-left:4px solid var(--dc);
+    border-radius:14px;
+    background:#fff;
+    padding:14px 14px 13px;
+    text-align:left;
+    display:grid;
+    gap:8px;
+    box-shadow:0 10px 30px -24px rgba(0,0,0,.28);
+  }
+
+  .mobile-day-card.empty{
+    background:var(--sf2);
+    border-style:dashed;
+    box-shadow:none;
+  }
+
+  .mobile-day-top{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:10px;
+  }
+
+  .mobile-day-meta{
+    min-width:0;
+  }
+
+  .mobile-day-name{
+    display:block;
+    font-family:var(--mono);
+    font-size:10px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--faint);
+  }
+
+  .mobile-day-theme{
+    display:block;
+    margin-top:4px;
+    font-family:var(--display);
+    font-weight:600;
+    font-size:14px;
+    color:var(--ink);
+  }
+
+  .mobile-day-action{
+    font-size:13px;
+    line-height:1.4;
+    color:var(--ink);
+  }
+
+  .mobile-day-empty{
+    font-size:13px;
+    line-height:1.45;
+    color:var(--muted);
+  }
+
+  .mobile-day-plus{
+    width:28px;
+    height:28px;
+    border-radius:999px;
+    border:1.5px solid var(--dc);
+    color:var(--dc);
+    display:grid;
+    place-items:center;
+    font-size:18px;
+    line-height:1;
+    flex-shrink:0;
   }
 
   .drawer{
@@ -235,19 +399,6 @@ const APP_OVERRIDES = `
 
   .prog-grid{
     min-width:640px;
-  }
-
-  .phase-row{
-    padding:22px 14px 16px;
-  }
-
-  .week-lbl{
-    padding:12px 10px;
-  }
-
-  .gcell{
-    min-height:88px;
-    padding:12px 10px;
   }
 }
 `;
@@ -779,6 +930,82 @@ function App() {
               );
             })}
           </div>
+
+          <div className="prog-mobile">
+            {phases.map((phase) => (
+              <section
+                key={phase.name}
+                className="mobile-phase"
+                style={{ "--phc": phase.color }}
+              >
+                <div className="mobile-phase-head">
+                  <span className="mobile-phase-name">{phase.name}</span>
+                  <span className="mobile-phase-weeks">
+                    {ui.weeks} {phase.r[0]}–{phase.r[1]}
+                  </span>
+                  <div className="mobile-phase-desc">{phase.desc}</div>
+                </div>
+
+                {Array.from({ length: phase.r[1] - phase.r[0] + 1 }, (_, index) => phase.r[0] + index).map((week) => {
+                  const note = weekData[week]?.note?.trim();
+                  const isCurrent = week === currentWeek;
+
+                  return (
+                    <div key={week} className="mobile-week">
+                      <button className="mobile-week-head" onClick={() => openNote(week)}>
+                        <div className="mobile-week-main">
+                          <div className="mobile-week-title">
+                            {ui.weekLabel(week)}
+                            {isCurrent ? <span className="mobile-week-dot" /> : null}
+                          </div>
+                          <div className="mobile-week-note">
+                            {note ? ui.noteIndicator : ui.tapToAddNote}
+                          </div>
+                        </div>
+                      </button>
+
+                      <div className="mobile-week-grid">
+                        {days.map((day, dayIndex) => {
+                          const selectedIndex = weekData[week]?.sel?.[dayIndex];
+                          const status = weekData[week]?.status?.[dayIndex] || "planned";
+                          const option = selectedIndex != null ? day.options[selectedIndex] : null;
+
+                          return (
+                            <button
+                              key={`${week}-${day.day}-mobile`}
+                              className={`mobile-day-card ${option ? "" : "empty"}`}
+                              style={{ "--dc": day.color }}
+                              onClick={() => (option ? openDetail(week, dayIndex) : openPicker(week, dayIndex))}
+                            >
+                              <div className="mobile-day-top">
+                                <div className="mobile-day-meta">
+                                  <span className="mobile-day-name">{day.day}</span>
+                                  <span className="mobile-day-theme">
+                                    {day.theme} · {day.fn}
+                                  </span>
+                                </div>
+                                {option ? (
+                                  <span className={`cell-status ${status}`} />
+                                ) : (
+                                  <span className="mobile-day-plus">+</span>
+                                )}
+                              </div>
+
+                              {option ? (
+                                <div className="mobile-day-action">{option.title}</div>
+                              ) : (
+                                <div className="mobile-day-empty">{day.syn}</div>
+                              )}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  );
+                })}
+              </section>
+            ))}
+          </div>
         </div>
 
         <div className={`backdrop ${drawer ? "open" : ""}`} onClick={() => setDrawer(null)} />
@@ -858,8 +1085,8 @@ function FragmentRows({
           className="phase-row"
           style={{
             "--phc": phase.color,
-            borderLeft: `5px solid ${phase.color}`,
-            background: `color-mix(in srgb, ${phase.color} 8%, #fff)`,
+            borderLeft: `2px solid color-mix(in srgb, ${phase.color} 58%, transparent)`,
+            background: `linear-gradient(180deg, color-mix(in srgb, ${phase.color} 6%, #fff), #fff 78%)`,
           }}
         >
           <span className="phase-row-name">{phase.name}</span>
