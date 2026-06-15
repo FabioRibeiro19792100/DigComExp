@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Digital Communication Plan · Expedição Roblox</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --canvas:#EDEEE8;--surf:#FFF;--sf2:#F6F7F2;
+  --ink:#18180F;--muted:#6A6D62;--faint:#93968B;
+  --hl:#DCDDD3;--hls:#C7C9BC;
+  --dark:#181812;--dark2:#211F18;
+  --on:#EFEFE6;--on2:#A6A89A;
+  --discord:#6B74F0;
+  --pub:#178A5A;--skip:#6A6D62;--plan:#D97706;--reach:#0891B2;
+  --pc:#E8472B;
+  --panel:#2D2E25;--panel2:#383930;--panel-line:rgba(255,255,255,.09);
+  --display:"Space Grotesk",system-ui,sans-serif;
+  --body:"Instrument Sans",system-ui,sans-serif;
+  --mono:"Space Mono",ui-monospace,monospace;
+  --rl:18px;--rm:12px;--rs:9px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--body);background:#fff;color:var(--ink);-webkit-font-smoothing:antialiased}
+button{font-family:inherit;cursor:pointer}
+.hidden{display:none!important}
+
+/* ── TOPBAR ── */
+.topbar{
+  position:sticky;top:0;z-index:10;
+  background:var(--dark);border-bottom:1px solid rgba(255,255,255,.07);
+  height:54px;padding:0 64px;
+  display:flex;align-items:center;gap:0;
+}
+.brand{
+  font-family:var(--display);font-size:14px;font-weight:600;
+  letter-spacing:-.01em;color:var(--on);
+  display:flex;align-items:center;gap:9px;margin-right:auto;
+}
+.brand-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--pc);transition:background .35s var(--ease);
+}
+.phase-chip{
+  font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--pc);border:1px solid color-mix(in srgb,var(--pc) 40%,transparent);
+  border-radius:100px;padding:5px 12px;
+}
+
+/* ── PROGRAM HEADER ── */
+.prog-hd{
+  padding:28px 64px 20px;
+  display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:16px;
+}
+.prog-eyebrow{
+  font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--faint);margin:0 0 8px;
+}
+.prog-title{
+  font-family:var(--display);font-weight:600;
+  font-size:clamp(22px,3vw,32px);letter-spacing:-.02em;margin:0;line-height:1;
+}
+.prog-subtitle{
+  font-family:var(--mono);font-size:11px;letter-spacing:.06em;
+  color:var(--faint);margin:6px 0 0;
+}
+.prog-stats{display:flex;gap:20px}
+.pstat{text-align:right}
+.pstat-n{
+  font-family:var(--display);font-weight:600;
+  font-size:26px;letter-spacing:-.02em;line-height:1;
+}
+.pstat-l{
+  font-family:var(--mono);font-size:9px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--faint);margin-top:3px;
+}
+
+/* ── PROGRAM GRID ── */
+.prog-wrap{padding:0 64px 80px;overflow-x:auto;background:#fff}
+
+.prog-grid{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:0;
+  min-width:700px;
+  background:#fff;
+  border-radius:var(--rm);
+  overflow:hidden;
+}
+
+/* Column headers */
+.col-hd{
+  padding:16px 14px 16px;
+  display:flex;flex-direction:column;gap:0;
+  background:#fff;
+  border-bottom:3px solid var(--dc,#E8472B);
+}
+.col-hd .ch-day{
+  font-family:var(--display);font-weight:700;font-size:18px;
+  letter-spacing:-.02em;line-height:1;color:var(--dc,#E8472B);
+}
+.col-hd .ch-theme{
+  font-family:var(--mono);font-size:10px;letter-spacing:.07em;
+  text-transform:uppercase;color:var(--faint);margin-top:8px;
+}
+.col-hd .ch-syn{
+  font-size:13px;line-height:1.45;color:var(--muted);
+  margin-top:8px;
+}
+.col-hd-corner{padding:16px 14px 16px;background:#fff}
+
+/* Phase divider row */
+.phase-row{
+  grid-column:1/-1;
+  display:grid;
+  grid-template-columns:auto 1fr;
+  grid-template-rows:auto auto;
+  gap:2px 20px;
+  padding:28px 16px 20px;
+  margin-top:0;
+  border-bottom:1px solid rgba(0,0,0,.07);
+}
+.phase-row-name{
+  font-family:var(--display);font-weight:700;font-size:17px;
+  letter-spacing:-.02em;color:var(--phc);
+  grid-row:1;grid-column:1;align-self:center;
+}
+.phase-row-weeks{
+  font-family:var(--mono);font-size:10px;letter-spacing:.07em;
+  text-transform:uppercase;color:var(--phc);opacity:.6;
+  grid-row:1;grid-column:2;align-self:center;
+}
+.phase-row-desc{
+  font-size:13px;color:var(--muted);line-height:1.5;
+  grid-row:2;grid-column:1/-1;margin-top:5px;
+}
+
+/* Week label column */
+.week-lbl{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:14px 12px;
+  background:#fff;border:0;
+  border-bottom:1px solid rgba(0,0,0,.07);
+  cursor:pointer;
+  transition:background .15s var(--ease);
+}
+.week-lbl:hover{background:var(--sf2)}
+.week-lbl.curr{
+  background:#EFEFEF;
+}
+.week-lbl.curr .wl-num{color:var(--ink)}
+.week-lbl.curr .wl-note-icon{color:var(--muted)}
+.wl-num{
+  font-family:var(--display);font-weight:600;font-size:13px;
+  letter-spacing:-.01em;line-height:1;color:var(--ink);
+}
+.wl-note-icon{
+  font-size:11px;color:var(--faint);margin-top:4px;
+  display:flex;align-items:center;gap:4px;
+}
+.wl-note-icon.has-note{color:var(--plan)}
+
+/* Grid cells */
+.gcell{
+  appearance:none;text-align:left;font:inherit;color:inherit;
+  min-height:100px;padding:16px 14px;
+  background:#fff;border:0;
+  border-top:3px solid transparent;
+  display:flex;flex-direction:column;justify-content:flex-start;gap:8px;
+  transition:background .2s var(--ease),border-color .15s var(--ease);
+  position:relative;cursor:pointer;
+  border-bottom:1px solid rgba(0,0,0,.07);
+}
+.gcell:focus-visible{outline:2px solid var(--dc,#E8472B);outline-offset:-2px;z-index:2}
+
+/* Empty cell */
+.gcell--empty{
+  background:var(--sf2);
+  justify-content:center;
+}
+.gcell--empty:hover{
+  background:color-mix(in srgb,var(--dc,#E8472B) 7%,var(--sf2));
+}
+.cell-plus{
+  width:32px;height:32px;border-radius:50%;
+  border:1.5px solid var(--hls);
+  color:var(--hls);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;font-weight:300;line-height:1;
+  margin:auto;
+  transition:border-color .2s var(--ease),color .2s var(--ease),transform .2s var(--ease);
+}
+.gcell--empty:hover .cell-plus{
+  border-color:var(--dc,#E8472B);
+  color:var(--dc,#E8472B);
+  transform:scale(1.1);
+}
+
+/* Filled cell */
+.gcell--filled{
+  background:#fff;
+  border-top-color:var(--dc,#E8472B);
+}
+.gcell--filled:hover{
+  background:color-mix(in srgb,var(--dc,#E8472B) 6%,#fff);
+  z-index:1;
+}
+
+/* Current week row */
+.gcell.curr-row.gcell--empty{
+  background:#F5F5F5;
+}
+.gcell.curr-row.gcell--filled{
+  background:#F5F5F5;
+}
+
+
+/* Filled cell */
+.cell-icon{
+  width:20px;height:20px;flex-shrink:0;
+  display:inline-flex;align-items:center;justify-content:center;
+  margin-right:8px;margin-top:1px;
+}
+.cell-icon svg{width:20px;height:20px;display:block;overflow:visible}
+.popt-icon{
+  width:24px;height:24px;flex-shrink:0;opacity:.85;
+  display:inline-flex;align-items:center;margin-right:11px;
+  color:var(--c,inherit);
+}
+.popt-icon svg{width:24px;height:24px;display:block}
+.dr-title-icon{
+  display:inline-flex;align-items:center;margin-right:10px;
+  opacity:.85;vertical-align:middle;
+  color:var(--c,#E8472B);
+}
+.dr-title-icon svg{width:22px;height:22px;display:block}
+.cell-title{
+  font-family:var(--display);font-weight:600;
+  font-size:13.5px;letter-spacing:-.01em;line-height:1.2;color:var(--ink);
+  display:flex;align-items:center;
+}
+.cell-meta{
+  display:flex;align-items:center;gap:5px;flex-wrap:wrap;
+}
+.cell-status{
+  width:8px;height:8px;border-radius:50%;flex-shrink:0;
+}
+.cell-status.planned  {background:var(--plan)}
+.cell-status.published{background:var(--pub)}
+.cell-status.skipped  {background:var(--skip)}
+.cell-reach{
+  font-family:var(--mono);font-size:8px;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--reach);
+}
+
+/* ── DRAWER ── */
+.backdrop{
+  position:fixed;inset:0;background:rgba(18,18,12,.18);backdrop-filter:blur(3px);
+  opacity:0;pointer-events:none;transition:opacity .25s var(--ease);z-index:40;
+}
+.backdrop.open{opacity:1;pointer-events:auto}
+
+.drawer{
+  position:fixed;top:0;right:0;width:520px;max-width:100%;height:100dvh;
+  background:#fff;color:var(--ink);
+  box-shadow:-1px 0 0 rgba(0,0,0,.08),-12px 0 32px -8px rgba(18,18,12,.12);
+  transform:translateX(100%);transition:transform .3s var(--ease);
+  z-index:50;display:flex;flex-direction:column;
+}
+.drawer.open{transform:translateX(0)}
+
+.dr-hd{
+  padding:22px 24px 20px;position:relative;
+  border-bottom:1px solid rgba(0,0,0,.07);flex-shrink:0;
+}
+.dr-hd::before{
+  content:'';position:absolute;top:0;left:0;width:100%;height:3px;
+  background:var(--c,#E8472B);
+}
+.dr-kick{
+  font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--c,#E8472B);margin-bottom:9px;
+}
+.dr-hd h2{
+  font-family:var(--display);font-weight:700;font-size:24px;
+  letter-spacing:-.02em;margin:0;line-height:1.1;padding-right:36px;color:var(--ink);
+  display:flex;align-items:center;gap:10px;
+}
+.dr-hd .sub{margin:7px 0 0;font-size:14px;color:var(--muted)}
+.close-btn{
+  position:absolute;top:20px;right:20px;width:30px;height:30px;
+  border:1px solid rgba(0,0,0,.1);background:transparent;color:var(--muted);
+  border-radius:var(--rs);font-size:14px;line-height:1;
+  display:grid;place-items:center;transition:background .15s var(--ease),color .15s var(--ease);
+  cursor:pointer;
+}
+.close-btn:hover{background:var(--sf2);color:var(--ink)}
+
+.exec-bar{
+  display:flex;align-items:center;gap:12px;padding:11px 24px;
+  background:#F5F5F5;border-bottom:1px solid rgba(0,0,0,.07);flex-shrink:0;
+}
+.exec-lbl{
+  font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--faint);flex-shrink:0;
+}
+.exec-btns{display:flex;gap:5px}
+.exec-btn{
+  font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;
+  background:#fff;color:var(--muted);
+  border:1px solid rgba(0,0,0,.12);border-radius:100px;padding:6px 12px;
+  cursor:pointer;transition:all .15s var(--ease);
+}
+.exec-btn:hover{color:var(--ink);border-color:rgba(0,0,0,.25)}
+.exec-btn.active[data-s="planned"]  {color:var(--plan);background:color-mix(in srgb,var(--plan) 10%,transparent);border-color:var(--plan)}
+.exec-btn.active[data-s="published"]{color:var(--pub); background:color-mix(in srgb,var(--pub)  10%,transparent);border-color:var(--pub)}
+.exec-btn.active[data-s="skipped"]  {color:var(--skip);background:rgba(0,0,0,.04);border-color:rgba(0,0,0,.2)}
+.exec-actions{display:flex;align-items:center;gap:6px;margin-left:auto}
+.change-btn{
+  font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;
+  background:transparent;color:var(--muted);border:1px solid rgba(0,0,0,.12);
+  border-radius:100px;padding:6px 12px;flex-shrink:0;cursor:pointer;
+  transition:all .15s var(--ease);
+}
+.change-btn:hover{color:var(--ink);border-color:rgba(0,0,0,.28)}
+.remove-btn{
+  font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;
+  background:transparent;color:#dc2626;
+  border:1px solid color-mix(in srgb,#dc2626 28%,transparent);
+  border-radius:100px;padding:6px 12px;flex-shrink:0;cursor:pointer;
+  transition:all .15s var(--ease);
+}
+.remove-btn:hover{border-color:#dc2626;background:color-mix(in srgb,#dc2626 5%,transparent)}
+
+.dr-body{padding:20px 24px 40px;overflow-y:auto;flex:1}
+
+.goal-strip{
+  display:flex;align-items:baseline;gap:10px;font-size:14px;line-height:1.45;
+  padding:11px 13px;background:#F5F5F5;
+  border-radius:var(--rs);margin-bottom:18px;color:var(--ink);
+}
+.goal-strip b{
+  font-family:var(--mono);font-weight:400;font-size:10px;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--faint);flex-shrink:0;
+}
+
+.detail-skills{
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  padding:10px 13px;margin-bottom:16px;
+  background:#F5F5F5;border-radius:var(--rs);
+}
+.dsk-lbl{
+  font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--faint);flex-shrink:0;
+}
+.dsk-pills{display:flex;flex-wrap:wrap;gap:5px}
+.dsk-pill{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.04em;
+  color:var(--c,#E8472B);
+  background:color-mix(in srgb,var(--c,#E8472B) 10%,transparent);
+  border:1px solid color-mix(in srgb,var(--c,#E8472B) 25%,transparent);
+  border-radius:100px;padding:4px 10px;white-space:nowrap;
+}
+
+.channel{
+  --ch:var(--c,#E8472B);
+  border:1px solid rgba(0,0,0,.07);
+  border-left:3px solid var(--ch);
+  border-radius:var(--rm);overflow:hidden;background:#fff;margin-bottom:14px;
+}
+.channel--discord{--ch:var(--discord)}
+.ch-hd{
+  display:flex;align-items:center;gap:10px;padding:11px 13px;
+  background:color-mix(in srgb,var(--ch) 6%,#F5F5F5);
+  border-bottom:1px solid rgba(0,0,0,.06);
+}
+.ch-icon{
+  width:26px;height:26px;flex-shrink:0;display:grid;place-items:center;
+  border-radius:7px;background:var(--ch);color:#fff;
+}
+.ch-icon svg{width:13px;height:13px;display:block}
+.ch-id{flex:1;min-width:0}
+.ch-name{font-family:var(--display);font-weight:600;font-size:14px;letter-spacing:-.01em;line-height:1.1;color:var(--ink)}
+.ch-meta{font-size:12px;color:var(--muted);margin-top:1px}
+.ch-tag{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;
+  color:var(--ch);border:1px solid color-mix(in srgb,var(--ch) 35%,transparent);
+  border-radius:100px;padding:4px 10px;flex-shrink:0;
+}
+.ch-body{padding:13px 13px 14px}
+.lane+.lane{margin-top:14px;padding-top:14px;border-top:1px solid rgba(0,0,0,.07)}
+.lane-hd{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}
+.lane-lbl{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.ready-tag{
+  display:inline-flex;align-items:center;gap:5px;
+  font-family:var(--mono);font-size:9px;letter-spacing:.07em;text-transform:uppercase;
+  color:var(--ch);flex-shrink:0;
+}
+.ready-tag::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--ch)}
+.lane--pub .caption-box{border-left:2px solid var(--ch)}
+.ch-desc{font-size:14px;line-height:1.5;margin:0 0 4px;color:var(--ink)}
+.field{font-size:13.5px;line-height:1.4;margin-top:10px;color:var(--ink)}
+.field b{
+  font-family:var(--mono);font-weight:400;font-size:10px;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--faint);display:block;margin-bottom:3px;
+}
+.dr-sec{
+  font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--faint);margin:14px 0 9px;display:flex;align-items:center;gap:8px;
+}
+.dr-sec::after{content:'';flex:1;height:1px;background:rgba(0,0,0,.07)}
+.script{counter-reset:beat;border-left:2px solid var(--c,#E8472B);padding-left:16px;display:grid;gap:12px}
+.beat{position:relative}
+.beat::before{
+  counter-increment:beat;content:counter(beat,decimal-leading-zero);
+  position:absolute;left:-26px;top:0;font-family:var(--mono);font-size:10px;color:var(--c,#E8472B);
+}
+.beat-lbl{font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--faint);margin-bottom:3px}
+.beat-txt{font-size:14px;line-height:1.45;color:var(--ink)}
+.caption-box{background:#F5F5F5;border:1px solid rgba(0,0,0,.07);border-radius:var(--rm);padding:12px 13px}
+.caption-box p{margin:0 0 10px;font-size:14px;line-height:1.5;color:var(--ink)}
+.copy-btn{
+  font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  background:var(--c,#E8472B);color:#fff;border:0;border-radius:var(--rs);
+  padding:7px 12px;font-weight:700;cursor:pointer;transition:filter .15s var(--ease);
+}
+.copy-btn:hover{filter:brightness(1.08)}
+.copy-btn.done{background:rgba(0,0,0,.08);color:var(--muted)}
+.checklist{display:grid;gap:1px}
+.checklist label{
+  display:flex;gap:10px;align-items:flex-start;font-size:13.5px;line-height:1.4;color:var(--ink);
+  padding:9px 0;border-bottom:1px solid rgba(0,0,0,.06);cursor:pointer;
+}
+.checklist label:last-of-type{border-bottom:0}
+.checklist input{
+  appearance:none;width:15px;height:15px;flex-shrink:0;margin-top:1px;
+  border:1.5px solid rgba(0,0,0,.2);border-radius:4px;position:relative;cursor:pointer;
+  transition:background .15s,border-color .15s;
+}
+.checklist input:checked{background:var(--c);border-color:var(--c)}
+.checklist input:checked::after{
+  content:'';position:absolute;left:4px;top:1px;
+  width:4px;height:8px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg);
+}
+.care-alert{
+  display:flex;align-items:flex-start;gap:11px;
+  background:color-mix(in srgb,var(--c,#E8472B) 7%,#fff);
+  border:1px solid color-mix(in srgb,var(--c,#E8472B) 22%,transparent);
+  border-left:3px solid var(--c,#E8472B);
+  border-radius:var(--rm);padding:13px 14px;margin-bottom:10px;
+}
+.care-alert-icon{font-size:16px;flex-shrink:0;margin-top:1px}
+.care-alert-lbl{
+  font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--c,#E8472B);display:block;margin-bottom:5px;
+}
+.care-alert-txt{font-size:14px;line-height:1.5;color:var(--ink)}
+.routine-wrap{
+  border:1px solid rgba(0,0,0,.08);border-radius:var(--rs);overflow:hidden;
+}
+.routine-summary{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);padding:11px 13px;cursor:pointer;list-style:none;
+  display:flex;align-items:center;justify-content:space-between;user-select:none;
+  background:#F5F5F5;
+}
+.routine-summary::-webkit-details-marker{display:none}
+.routine-summary::after{content:'↓';font-size:11px;color:var(--faint);transition:transform .2s var(--ease)}
+details[open] .routine-summary::after{transform:rotate(180deg)}
+.routine-wrap .checklist{padding:0 13px 4px}
+
+.anexo-skills{margin-top:4px}
+.anexo-item{
+  padding:13px 0;
+  border-bottom:1px solid rgba(0,0,0,.07);
+}
+.anexo-item:last-child{border-bottom:0}
+.anexo-name{
+  font-family:var(--display);font-weight:600;font-size:13.5px;
+  letter-spacing:-.01em;color:var(--c,#E8472B);
+  display:block;margin-bottom:5px;
+}
+.anexo-ctx{
+  font-size:13px;line-height:1.55;color:var(--muted);display:block;
+}
+.prompt-section{margin-top:4px}
+.prompt-box{
+  background:#F5F5F5;border:1px solid rgba(0,0,0,.07);
+  border-left:3px solid var(--c,#E8472B);
+  border-radius:var(--rm);padding:14px 14px 12px;
+}
+.prompt-txt{
+  font-family:var(--mono);font-size:11.5px;line-height:1.6;
+  color:var(--muted);margin:0 0 12px;
+  letter-spacing:.01em;
+}
+.note-mode{padding:4px 0}
+.note-mode textarea{
+  width:100%;background:#F5F5F5;border:1px solid rgba(0,0,0,.08);
+  border-radius:var(--rm);color:var(--ink);font-family:var(--body);font-size:13.5px;
+  line-height:1.5;padding:14px;resize:vertical;min-height:120px;outline:none;
+  transition:border-color .15s var(--ease);
+}
+.note-mode textarea:focus{border-color:rgba(0,0,0,.2)}
+.note-mode textarea::placeholder{color:var(--faint)}
+.note-save{
+  margin-top:10px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  background:#F5F5F5;color:var(--ink);border:1px solid rgba(0,0,0,.12);
+  border-radius:var(--rs);padding:9px 16px;cursor:pointer;transition:all .15s var(--ease);
+}
+.note-save:hover{background:rgba(0,0,0,.06);border-color:rgba(0,0,0,.2)}
+.note-save.saved{background:var(--pub);border-color:var(--pub);color:#fff}
+.footer-txt{
+  margin-top:20px;padding-top:14px;border-top:1px solid rgba(0,0,0,.07);
+  font-size:11px;line-height:1.55;color:var(--faint);
+}
+
+/* ── PICKER ── */
+.picker-ctx{
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:16px;
+}
+.picker-ctx .ctx-tag{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;
+  background:var(--sf2);border:1px solid var(--hl);border-radius:100px;
+  padding:5px 11px;color:var(--muted);
+}
+.picker-options{display:flex;flex-direction:column;gap:8px}
+.popt{
+  appearance:none;text-align:left;font:inherit;color:inherit;
+  background:var(--surf);border:1px solid var(--hl);border-left:3px solid var(--c,#E8472B);
+  border-radius:var(--rm);padding:18px 18px;
+  display:grid;gap:8px;
+  transition:border-color .15s var(--ease),background .15s var(--ease),box-shadow .15s var(--ease);
+}
+.popt:hover{
+  border-color:var(--c,#E8472B);background:color-mix(in srgb,var(--c,#E8472B) 3%,var(--surf));
+  box-shadow:0 2px 16px -6px color-mix(in srgb,var(--c,#E8472B) 25%,transparent);
+}
+.popt-title{
+  font-family:var(--display);font-weight:600;font-size:17px;
+  letter-spacing:-.02em;line-height:1.1;color:var(--ink);
+  display:flex;align-items:center;
+}
+.popt-meta{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.ptag{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;
+  padding:4px 10px;border-radius:100px;
+}
+.ptag.rec {color:var(--pub);background:color-mix(in srgb,var(--pub) 12%,transparent);border:1px solid color-mix(in srgb,var(--pub) 30%,transparent)}
+.ptag.off {color:var(--faint);background:var(--sf2);border:1px solid var(--hl)}
+.ptag.recent-0{
+  color:var(--dark2);background:var(--plan);border:1px solid var(--plan);font-weight:700;
+}
+.ptag.recent-1{
+  color:var(--plan);background:color-mix(in srgb,var(--plan) 12%,transparent);
+  border:1px solid color-mix(in srgb,var(--plan) 30%,transparent);
+}
+.ptag.recent-2{
+  color:var(--on2);background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+  opacity:.6;
+}
+.ptag.rec::before{content:'✓ '}
+.popt-desc{font-size:14px;line-height:1.5;color:var(--muted);margin-top:1px}
+.popt-skills{
+  margin-top:10px;padding-top:10px;border-top:1px solid var(--hl);
+}
+.popt-skills-lbl{
+  font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--faint);display:block;margin-bottom:7px;
+}
+.skill-pills{display:flex;flex-wrap:wrap;gap:5px}
+.skill-pill{
+  font-family:var(--mono);font-size:8.5px;letter-spacing:.04em;
+  color:var(--c,#E8472B);
+  background:color-mix(in srgb,var(--c,#E8472B) 10%,transparent);
+  border:1px solid color-mix(in srgb,var(--c,#E8472B) 28%,transparent);
+  border-radius:100px;padding:3px 9px;white-space:nowrap;
+}
+
+@media(max-width:600px){
+  .topbar,.prog-hd,.prog-wrap{padding-left:16px;padding-right:16px}
+  .drawer{width:100%}
+  .dr-hd,.exec-bar,.dr-body{padding-left:18px;padding-right:18px}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><span class="brand-dot" id="brandDot"></span>Expedição Roblox · Communication</div>
+  <span class="phase-chip" id="phaseChip"></span>
+</div>
+
+<div class="prog-hd">
+  <p class="prog-eyebrow">Expedição Roblox 2026</p>
+  <h1 class="prog-title">Digital Communication Plan</h1>
+</div>
+
+<div class="prog-wrap">
+  <div class="prog-grid" id="progGrid"></div>
+</div>
+
+<div class="backdrop" id="backdrop"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true">
+  <header class="dr-hd" id="drHd">
+    <button class="close-btn" id="closeDrawer" aria-label="Close">✕</button>
+    <p class="dr-kick" id="drKick"></p>
+    <h2 id="drTitle"></h2>
+    <p class="sub" id="drSub"></p>
+  </header>
+  <!-- exec bar only in detail mode -->
+  <div class="exec-bar hidden" id="execBar">
+    <span class="exec-lbl">Status</span>
+    <div class="exec-btns">
+      <button class="exec-btn" data-s="planned">Planned</button>
+      <button class="exec-btn" data-s="published">Published</button>
+      <button class="exec-btn" data-s="skipped">Skipped</button>
+    </div>
+    <div class="exec-actions">
+      <button class="change-btn" id="changeBtn">Change</button>
+      <button class="remove-btn" id="removeBtn">Remove</button>
+    </div>
+  </div>
+  <div class="dr-body" id="drBody"></div>
+</aside>
+
+<script>
+/* ════════════ DATA ════════════ */
+
+const ICONS={
+  gamepad:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><line x1="6" y1="12" x2="10" y2="12"/><line x1="8" y1="10" x2="8" y2="14"/><line x1="15" y1="11" x2="15" y2="11"/><line x1="18" y1="13" x2="18" y2="13"/></svg>`,
+  sparkle:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v2m0 14v2M3 12h2m14 0h2m-3.22-6.78-1.42 1.42M7.64 16.36l-1.42 1.42m0-11.56 1.42 1.42m8.72 8.72 1.42 1.42"/><circle cx="12" cy="12" r="4"/></svg>`,
+  lightbulb:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5C17.5 10.4 18 9.3 18 8a6 6 0 0 0-12 0c0 1.3.5 2.4 1.5 3.5.8.8 1.3 1.5 1.5 2.5"/><path d="M9 18h6m-3 4v-4"/></svg>`,
+  trending:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>`,
+  vote:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>`,
+  message:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>`,
+  zap:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`,
+  swords:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/><line x1="13" y1="19" x2="19" y2="13"/><line x1="16" y1="16" x2="20" y2="20"/><line x1="19" y1="21" x2="21" y2="19"/><polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/><line x1="5" y1="14" x2="9" y2="18"/><line x1="7" y1="21" x2="9" y2="19"/></svg>`,
+  radio:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M4.93 4.93a10 10 0 0 0 0 14.14m14.14-14.14a10 10 0 0 1 0 14.14M7.76 7.76a6 6 0 0 0 0 8.49m8.49-8.49a6 6 0 0 1 0 8.49"/></svg>`,
+  mic:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2m7 9v4m-4 0h8"/></svg>`,
+  wrench:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>`,
+  eye:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`,
+  book:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>`,
+  cpu:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>`,
+  film:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/></svg>`,
+  bug:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 7.13v-1a3.003 3.003 0 1 1 6 0v1"/><path d="M12 20c-3.3 0-6-2.7-6-6v-3a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v3c0 3.3-2.7 6-6 6z"/><path d="M12 20v-9m-3 4.5H6m12 0h-3M6 9.5H4m16 0h-2"/></svg>`,
+  trophy:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6m12 0h1.5a2.5 2.5 0 0 1 0 5H18M4 22h16M8 22v-3a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v3"/><rect x="6" y="2" width="12" height="13" rx="2"/></svg>`,
+  award:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>`,
+  star:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
+  rocket:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09zM12 2s4 4 4 10c0 2.76-1.12 5.26-2.93 7.07A9.97 9.97 0 0 1 6 22C6 16 10 12 12 2z"/><path d="m5 11 3 3m6-9 1.5 1.5"/></svg>`,
+};
+
+const SKILL_CONTEXT={
+  'Game mechanics design':'Understanding why a game rule works is systems design thinking — the same logic used in digital products, apps, and interactive experiences.',
+  'Critical analysis':'Asking "why does this work?" before consuming anything is the starting point of the analytical thinking demanded in technology, business, and communication.',
+  'Systems thinking':'Seeing how parts connect to form a whole is the foundation of software engineering, project management, and product design.',
+  'Creator identity':'Being able to name what you create and why you create it is the foundation of the professional portfolio in any creative or technical field.',
+  'Career reference':'Knowing the real journeys of people who have built things is the most effective way to imagine concrete professional paths.',
+  'Career trajectory':'Understanding that a career is built by decisions, not destiny, is a self-management competency fundamental to today\'s job market.',
+  'Digital literacy':'Knowing how to find, verify, and interpret information in digital environments is as essential as reading and writing — and increasingly demanded in any profession.',
+  'Research and fact-checking':'Checking the source before sharing is the principle of journalism, science, and any serious professional practice.',
+  'Information synthesis':'Transforming a complex idea into something clear and brief is one of the most valued skills in communication, product, and leadership.',
+  'Context reading':'Perceiving what is happening around before acting is a competency in market analysis, strategy, and competitive intelligence.',
+  'Trend analysis':'Identifying emerging patterns before they become consensus is what product analysts, investors, and strategic content creators do.',
+  'Critical thinking':'Questioning before accepting, and arguing based on evidence, is the most in-demand competency in tech and innovation job interviews.',
+  'Decision-making':'Choosing between options with criteria and clarity is a core skill in management, product, and any position of responsibility.',
+  'Argumentation':'Defending a position with logic and evidence — not just emotion — is the core of professional communication and leadership.',
+  'Opinion expression':'Articulating what you think clearly and respectfully is a skill that distinguishes professionals in meetings, presentations, and negotiations.',
+  'Creative thinking':'Generating ideas that don\'t yet exist, within real constraints, is what designers, engineers, and entrepreneurs do.',
+  'Conceptual design':'Transforming an intention into a proposal with form is the first step in any design, architecture, or product development process.',
+  'Idea articulation':'Explaining what is in your head so others understand is one of the rarest and most valuable competencies in the job market.',
+  'Rapid prototyping':'Materializing an idea quickly to test it is the central method of design thinking, innovation, and agile development.',
+  'Creativity':'The ability to combine elements in new and useful ways is the competency that most differentiates professionals in high-uncertainty environments.',
+  'Execution':'Completing what was started, even under pressure, is a rare and highly valued ability in any professional context.',
+  'Structured debate':'Defending a position with arguments, listening to the other side, and changing your mind when necessary is the foundation of quality collaborative work.',
+  'Oral communication':'Speaking in public with clarity and confidence is one of the most requested skills in job interviews and performance reviews.',
+  'Digital presence':'Knowing how to communicate and position yourself in online environments is a professional competency just as much as knowing how to dress for a meeting.',
+  'Collaboration':'Working with others in ways that amplify the result — not just divide the work — is the foundation of high-performance teams.',
+  'Active listening':'Listening to understand, not just to respond, is the competency that distinguishes effective leaders from common communicators.',
+  'Question formulation':'Asking the right question is more valuable than having the right answer — it\'s what journalists, researchers, and the best leaders do.',
+  'Network building':'Creating professional relationships with purpose and reciprocity is one of the most underestimated and most decisive skills for long careers.',
+  'Hands-on learning':'Learning by doing, failing, and adjusting is the most effective learning method — and the most demanded in real work environments.',
+  'Persistence':'Continuing in the face of obstacles without abandoning the goal is one of the competencies most valued by employers and entrepreneurs.',
+  'Constructive feedback':'Giving and receiving criticism in a way that improves the work — without attacking or defending — is a skill rarely taught and always evaluated.',
+  'Critical assessment':'Judging quality with clear criteria, not just personal taste, is what editors, evaluators, judges, and quality leaders do.',
+  'Assertive communication':'Saying what needs to be said, with clarity and without aggression, is the basis of leadership, negotiation, and effective teamwork.',
+  'Computational thinking':'Decomposing a problem into steps, identifying patterns, and creating logical solutions is the core of programming — and of any profession that uses data.',
+  'Programming logic':'Writing instructions that a machine executes correctly is the most globally demanded technical skill in the job market.',
+  'Problem-solving':'Identifying the root cause of a problem before trying to solve it is what differentiates those who fix symptoms from those who resolve causes.',
+  'Prompt engineering':'Formulating precise instructions for AI systems is a new, high-demand technical competency across all fields using artificial intelligence.',
+  'AI literacy':'Understanding what AI can and cannot do — and knowing how to evaluate its results — is an essential competency for any professional in the coming years.',
+  'Output evaluation':'Judging whether a result generated by AI is useful, correct, and ethical is an irreplaceable human skill in working with automated systems.',
+  'Project management':'Planning, organizing, and tracking stages to deliver something within a deadline is the core competency of product, engineering, and consulting.',
+  'Documentation':'Recording decisions, processes, and results clearly is what makes one person\'s work useful to others — and turns a team into an organization.',
+  'Iteration':'Improving progressively rather than seeking immediate perfection is the working method of startups, game studios, and product teams.',
+  'Debugging':'Finding where a logic fails, and why, is one of the most valuable skills in programming — and an analytical thinking exercise in any field.',
+  'Resilience':'Recovering from errors and frustrated attempts without giving up on the goal is the competency that most distinguishes professionals with long careers.',
+  'Trial-and-error learning':'Testing hypotheses, observing results, and adjusting is the scientific method in practice — and the foundation of developing any technical skill.',
+  'Digital portfolio':'Building and presenting a collection of completed work is the most effective way to demonstrate competency in creative and technical fields.',
+  'Curation':'Selecting, organizing, and presenting what has value among the excess available is a high-demand skill in media, culture, and technology.',
+  'Project communication':'Presenting what was done, why it was done, and what was learned is a core skill in design, engineering, and management.',
+  'Criteria-based evaluation':'Judging based on clear, pre-defined parameters — not personal preference — is what makes evaluations fair and learning real.',
+  'Handling results':'Processing wins and losses with balance is an emotional and professional competency that determines the ability to keep growing.',
+  'Cycle completion':'Concluding a stage clearly and intentionally — celebrating or learning — is what allows a team to move forward with renewed energy.',
+  'Leadership':'Positively influencing other people\'s behavior, without needing formal authority, is the most transformative competency in the job market.',
+  'Recognizing contribution':'Identifying and naming what other people have done well is a management and leadership practice that multiplies team engagement.',
+  'Planning':'Anticipating stages, resources, and obstacles before starting reduces waste and increases delivery probability — in projects of any scale.',
+  'Proposal communication':'Presenting an idea in a way that inspires action in others is the foundation of entrepreneurship, leadership, and any role that involves persuasion.',
+  'Audience engagement':'Creating content that leads people to act — not just consume — is a skill in marketing, communication, and experience design.',
+};
+
+const PREPOP={
+  1:{0:0,1:0,2:1,3:0,4:3},
+  2:{0:2,1:1,2:0,3:1,4:2},
+  3:{0:3,1:3,2:1,3:3,4:3},
+  4:{0:1,1:2,2:0,3:2,4:2},
+  5:{0:0,1:1,2:2,3:1,4:0},
+  6:{0:3,1:3,2:1,3:0,4:3},
+  7:{0:1,1:0,2:2,3:3,4:1},
+  8:{0:2,1:2,2:0,3:2,4:0},
+  9:{0:3,1:1,2:3,3:1,4:2},
+  10:{0:1,1:3,2:2,3:2,4:0},
+  11:{0:3,1:2,2:3,3:3,4:1},
+  12:{0:0,1:1,2:0,3:1,4:2},
+  13:{0:1,1:3,2:3,3:2,4:0},
+};
+
+function prepopulate(){
+  let hasData=false;
+  for(let i=1;i<=13;i++){if(wkData[i]&&Object.keys(wkData[i].sel||{}).length){hasData=true;break;}}
+  if(hasData)return;
+  for(let w=1;w<=13;w++){
+    if(!PREPOP[w])continue;
+    wkData[w]={sel:{},status:{},note:''};
+    Object.keys(PREPOP[w]).forEach(di=>{
+      wkData[w].sel[di]=PREPOP[w][di];
+      wkData[w].status[di]='planned';
+    });
+    saveW(w);
+  }
+}
+const PHASES=[
+  {name:'Ativação',    r:[1,4],  color:'#E8472B', desc:'Atrair os primeiros criadores e criar o hábito de participação.'},
+  {name:'Engajamento', r:[5,9],  color:'#2F58E0', desc:'Aprofundar criação e consolidar a comunidade.'},
+  {name:'Consolidação',r:[10,13],color:'#178A5A', desc:'Reconhecimento, co-criação e comunidade autossustentável.'}
+];
+
+// pf:[ativação,engajamento,consolidação] 2=rec 1=ok 0=fora
+const DAYS=[
+  {
+    day:'Segunda', syn:'Content about the creator universe — games, creators, and trends.',theme:'Universo',fn:'Explorar',color:'#E8472B',
+    objective:'Manter conexão com o universo criador. Conteúdo que atrai novos olhares e aprofunda repertório.',
+    options:[
+      {title:'Game of the Week', prompt:'A glowing neon Roblox-style game world floating in dark space, seen through a giant magnifying glass held by an oversized hand. Pixelated terrain and tiny blocky characters inside. Bold orange light radiating outward. Flat editorial illustration, graphic poster style, strong geometric composition, vibrant, no text. 1:1 square.', iconKey:'gamepad', discordMsg:'We just posted about this game. Now the question is yours: what would you change about it? A mechanic, a character, a level — anything goes. Post it here.', skills:["Game mechanics design", "Critical analysis", "Systems thinking"],      attract:true, pf:[2,2,1],obj:'Expand the creation repertoire.',fmt:'Short video with simple analysis.',aud:'Young people who already play Roblox.',script:[['Hook','"Do you know why this game hooks so many people?"'],['Context','Show the game and explain one mechanic that\'s easy to understand.'],['Turn','Connect the mechanic to creation: "how would you do it differently?"'],['CTA','"Join the community — link in bio."']],caption:'Today we look at a Roblox game and try to understand what makes it work. What would you change about it?',discordAction:'Thread: "What would you change about this game?"',care:'Use only permitted clips. No unauthorized music. Avoid images of minors.'},
+      {title:'Creator of the Week', prompt:'A young teenage creator silhouetted against a glowing monitor displaying a half-built Roblox world. Dynamic spotlight from above, tools and game assets floating around them like an orbit. Warm orange glow, bold shadows, editorial graphic illustration. Heroic composition. No text. 1:1 square.', iconKey:'sparkle', discordMsg:'Today we brought the story of a creator. What about you — who inspires you? It can be someone from Roblox, YouTube, any field. Share here.', skills:["Creator identity", "Career reference", "Career trajectory"],   attract:true, pf:[2,2,2],obj:'Show that behind every game there is a person with an idea.',fmt:'Short profile video.',aud:'Teenagers interested in creating.',script:[['Hook','"Behind this game there\'s someone creating every detail."'],['Context','Introduce the creator and the type of experience they build.'],['Turn','Show that creating starts with simple ideas.'],['CTA','"Join the community — link in bio."']],caption:'Every game starts with someone trying to build an idea. Today we spotlight a creator and ask: what game would you create?',discordAction:'Thread: "Quem te inspira a criar?"',care:'Usar informações públicas. Evitar exposição de dados pessoais do criador.'},
+      {title:'Roblox Curiosity', prompt:'A giant glowing question mark made entirely of Roblox-style blocks exploding outward, pixel fragments scattered against a deep dark background with orange sparks. Surprise and discovery energy. Pop-art inspired, bold flat colors, high contrast. No text. 1:1 square.', iconKey:'lightbulb', discordMsg:'Did you already know this Roblox curiosity?\n👍 Already knew\n🤯 Didn\'t know\nVote and, if you want, tell us where you found out.', skills:["Digital literacy", "Research and fact-checking", "Information synthesis"], attract:true, pf:[2,1,0],obj:'Open the door of the universe for those still on the outside.',fmt:'Curiosity video.',aud:'Broad audience.',script:[['Hook','"This Roblox curiosity sounds fake, but it\'s real."'],['Context','Present the fact simply and visually.'],['Turn','Connect it to creation or player behavior.'],['CTA','"Tell us about it — link in bio."']],caption:'A quick curiosity to start the week. Did you already know this?',discordAction:'Enquete: "Você já sabia disso?"',care:'Check the source before publishing. Avoid numbers without attribution.'},
+      {title:'Trend of the Week', prompt:'An upward-trending graph where each data point is a floating Roblox-style game island, connected by glowing lines. A teenage figure surfs the rising curve. Electric orange and deep purple palette. Retro-futurist editorial illustration, dynamic diagonal composition. No text. 1:1 square.', iconKey:'trending', discordMsg:'Is this trend here to stay or gone in two weeks?\n🔥 Here to stay\n💨 Gone fast\nVote and defend your choice here.', skills:["Context reading", "Trend analysis", "Critical thinking"], attract:true, pf:[2,2,1],obj:'Read the moment of the creator universe and generate timely conversation.',fmt:'Trend video.',aud:'Teenagers who follow games and creators.',script:[['Hook','"Everyone\'s talking about this. But why?"'],['Context','Show the trend and where it appears.'],['Turn','Does it have creation potential or is it just a passing fad?'],['CTA','"Debate with us — link in bio."']],caption:'The trend of the week is here. What do you think: is it here to stay or will it fade fast?',discordAction:'Votação: "Tendência ou modinha?"',care:'Avoid encouraging risky behavior for minors.'}
+    ]
+  },
+  {
+    day:'Terça', syn:'Participation through voting, debate, and imagination challenges.',theme:'Ideias',fn:'Propor',color:'#E0930B',
+    objective:'Give the community a voice — debate, proposals, and collective imagination.',
+    options:[
+      {title:'Vote', prompt:'Two giant game concept bubbles floating side by side, each containing a miniature Roblox world. A crowd of tiny blocky figures below pointing upward toward their choice. Bold graphic composition, democratic energy, vibrant flat illustration, deep cobalt blue. No text. 1:1 square.', iconKey:'vote', skills:["Decision-making", "Argumentation", "Opinion expression"], discordMsg:'Time to vote. Which of these ideas would you play? [Option A] or [Option B]? Vote and explain in one sentence why.', skills:["Decision-making", "Argumentation", "Opinion expression"],             attract:true, pf:[2,1,1],obj:'Estimular a primeira participação — barreira zero.',fmt:'Post or Reels with simple choice.',aud:'Audience not yet in the Discord.',script:[['Hook','"Which of these ideas would you play?"'],['Context','Present two or three options with clear visuals.'],['Turn','Ask for a quick choice and justification in one sentence.'],['CTA','"Vote with us — link in bio."']],caption:'Choose an option and defend your idea.',discordAction:'Votação espelhada + thread para comentários.',care:'Avoid questions that collect personal data (age, school, location).'},
+      {title:'Question of the Week', prompt:'An enormous speech bubble rising from a crowd of diverse teenage figures, filled with swirling visual ideas — mini game worlds, sparks, shapes. Deep cobalt blue background. The bubble expands beyond the frame. Community imagination made visible. Bold editorial illustration. No text. 1:1 square.', iconKey:'message', discordMsg:'The question of the week: if you could create any game on Roblox, what would it be? It can be a simple idea. Write it here — we read everything.', skills:["Creative thinking", "Conceptual design", "Idea articulation"],  attract:true, pf:[2,2,1],obj:'Collect ideas and open space for those who want to be heard.',fmt:'Question video.',aud:'Teens aged 13 to 18 who like to imagine.',script:[['Hook','"If you could create any game on Roblox, what would it be?"'],['Context','Give 2 or 3 examples to unlock responses.'],['Turn','A simple idea can become a prototype.'],['CTA','"Send your idea — link in bio."']],caption:'The question of the week: what game would you create on Roblox?',discordAction:'Thread fixa para receber ideias.',care:'Moderate responses. Remove personal data and inappropriate content.'},
+      {title:'Mini Challenge', prompt:'A large stopwatch face cracking open with a lightning bolt bursting through it, surrounded by tiny Roblox-style creations appearing in rapid succession. Electric blue and yellow, high-energy composition, urgency and speed. Bold flat graphic. No text. 1:1 square.', iconKey:'zap', discordMsg:'Mini challenge: you have 30 seconds to invent a character. Name, special power, and weakness. Send it here — no filter, the first idea that comes to mind.', skills:["Rapid prototyping", "Creativity", "Execution"],        attract:false,pf:[1,2,2],obj:'Generate the first deliveries and show that creating is accessible.',fmt:'Quick challenge video.',aud:'Discord members who want to experiment.',script:[['Hook','"You have 30 seconds to invent a character."'],['Context','Explain the task in one sentence.'],['Turn','Give a quick example to help.'],['CTA','"Send your answer — link in bio."']],caption:'Mini challenge of the day: create a character, a mission, or a power. Simple ideas count.',discordAction:'Canal ou thread de envio das respostas.',care:'Definir regra de respeito e moderação antes de receber envios.'},
+      {title:'Battle of Ideas', prompt:'Two game concepts colliding head-on at the center of the frame, each as a glowing geometric shape with a miniature Roblox world inside. Energy shockwave radiating outward. Competitive and playful. Deep blue background, contrasting warm and cool accents. Graphic illustration. No text. 1:1 square.', iconKey:'swords', discordMsg:'Battle of ideas. Which would win: [Idea A] or [Idea B]? Pick a side and defend it with arguments. Just voting doesn\'t count.', skills:["Argumentation", "Critical thinking", "Structured debate"],   attract:true, pf:[1,2,2],obj:'Generate energetic debate and bring new participants through conflict.',fmt:'Comparison video.',aud:'Teenagers who like to express opinions.',script:[['Hook','"Which game would win: mutant city or haunted school?"'],['Context','Present both ideas visually.'],['Turn','Ask for arguments, not just votes.'],['CTA','"Join the community and defend your choice — link in bio."']],caption:'Today there\'s a battle of ideas. Choose a side and defend it.',discordAction:'Dois tópicos, um para cada ideia.',care:'Moderate competitive language to prevent personal attacks.'}
+    ]
+  },
+  {
+    day:'Quarta', syn:'Events, guests, and meetups with increasing intensity.',theme:'Encontro',fn:'Reunir',color:'#178A5A',
+    objective:'Bring people together with intensity calibrated to the phase.',
+    options:[
+      {title:'Live', prompt:'A teenage creator glowing behind a ring light, streaming live to a digital crowd represented by floating holographic faces. Red live indicator light, deep green scene. Intimate, energetic, real. Cinematic editorial illustration, warm spotlight feel. No text. 1:1 square.', iconKey:'radio', discordMsg:'Live today at [time]! We\'re going to create something live — you can watch and participate via chat. Set a reminder so you don\'t miss it.', skills:["Oral communication", "Digital presence", "Collaboration"],                attract:false,pf:[1,2,2],obj:'Build presence and connection when there is already critical mass.',fmt:'Invitation video.',aud:'Participantes que já consideram entrar.',script:[['Hook','"Today we\'re going to create something live."'],['Context','Explain the theme, time, and what will happen.'],['Turn','What the person takes from the live: idea, technique, or participation.'],['CTA','"Join the community — link in bio."']],caption:'There\'s a live Expedição Roblox session today. Check the link in bio.',discordAction:'Evento, lembrete, sala de comentários e resumo pós-live.',care:'Inform about moderation rules. Avoid exposing minors without authorization.'},
+      {title:'Guest', prompt:'Two chairs facing each other across a glowing table, one occupied by a silhouetted figure, the other by a mysterious glowing presence. A microphone floats between them. Forest green background, warm light on the conversation space. Anticipation and openness. Editorial illustration. No text. 1:1 square.', iconKey:'mic', discordMsg:'A guest is coming to Expedição Roblox. Before the conversation, you can send your question. What do you want to know about [guest topic]? Post it here.', skills:["Active listening", "Question formulation", "Network building"],           attract:true, pf:[2,2,1],obj:'Open a window to the outside world — guests attract new audiences.',fmt:'Teaser video.',aud:'Teenagers interested in creation and career.',script:[['Hook','"Want to ask someone who creates digital experiences?"'],['Context','Introduce the guest and the topic of the conversation.'],['Turn','The community sends questions.'],['CTA','"Send your question — link in bio."']],caption:'A guest is coming to Expedição Roblox. Send your question — link in bio.',discordAction:'Thread: "Perguntas para o convidado".',care:'Guide respectful questions. No collection of personal data.'},
+      {title:'Open Workshop', prompt:'Multiple teenage hands reaching in from different directions, each holding a different tool — brush, wrench, keyboard, controller — all building the same floating Roblox structure at center. Collaborative construction energy. Green tones, workshop warmth, bold graphic composition. No text. 1:1 square.', iconKey:'wrench', skills:["Hands-on learning", "Collaboration", "Persistence"], discordMsg:'Open workshop! We\'re going to build [what will be made] step by step. Confirm your spot here with ✅ and we\'ll send the materials beforehand.', skills:["Hands-on learning", "Collaboration", "Persistence"],      attract:false,pf:[0,2,2],obj:'Generate practical delivery for those already committed.',fmt:'Workshop invitation video.',aud:'Discord members who want to create.',script:[['Hook','"Want to create your first experience in Roblox?"'],['Context','Explain what will be built.'],['Turn','The activity is guided and accessible.'],['CTA','"Confirm your spot — link in bio."']],caption:'Open workshop at Expedição Roblox. Let\'s create together, step by step.',discordAction:'Confirmation channel, materials, and final delivery.',care:'Make the level clear. Use accessible language for minors.'},
+      {title:'Project Review', prompt:'A giant half-built Roblox game world on a floating screen, with visual annotation arrows orbiting it. A pair of eyes peering thoughtfully from below. Constructive analytical energy. Deep green and white, clean graphic design aesthetic. No text. 1:1 square.', iconKey:'eye', discordMsg:'This week we\'re reviewing community projects. Send yours — it can be an idea, a screenshot, a map, anything you\'re building.', skills:["Constructive feedback", "Critical assessment", "Assertive communication"],  attract:false,pf:[0,1,2],obj:'Offer public feedback — the community takes care of those who create.',fmt:'Vídeo convite.',aud:'Members who have an idea, screenshot, map, or prototype.',script:[['Hook','"Want us to look at your project?"'],['Context','Serão analisadas ideias, prints ou protótipos.'],['Turn','Focus on helping improve, not judging.'],['CTA','"Send your project — link in bio."']],caption:'Submit your project for review. Ideas, screenshots, maps, and prototypes are all welcome.',discordAction:'Fila de envio e regras de feedback.',care:'Request authorization before showing projects. No data from minors.'}
+    ]
+  },
+  {
+    day:'Quinta', syn:'Creation practice through tutorials, AI, and real process.',theme:'Fazer',fn:'Criar',color:'#2F58E0',
+    objective:'Show that creating is a process. Tutorials and demos have high discovery potential.',
+    options:[
+      {title:'Roblox Tutorial', prompt:'A staircase made of Roblox Studio interface blocks ascending toward a glowing finished game world at the top, each step more complex. A tiny figure climbing upward. Deep purple and electric blue palette. Step-by-step learning visualized. Bold flat editorial illustration. No text. 1:1 square.', iconKey:'book', discordMsg:'New tutorial is live. Try it out and send a screenshot of your result. If you get stuck anywhere, post it here and we\'ll help.', skills:["Computational thinking", "Programming logic", "Problem-solving"],     attract:true, pf:[2,2,1],obj:'Apply learning — and attract those looking for how to do something.',fmt:'Short tutorial.',aud:'Beginners who want to make something concrete.',script:[['Hook','"Today you learn one simple thing to use in your game."'],['Context','Show the action step by step.'],['Turn','Where this can be used in a game.'],['CTA','"Test it and send the result — link in bio."']],caption:'Quick tutorial to create something simple in Roblox Studio.',discordAction:'Channel for questions and screenshot submissions.',care:'Avoid long technical instructions. Keep it appropriate for beginners.'},
+      {title:'Applied AI', prompt:'A human teenage hand and a geometric AI hand reaching toward each other, both holding the same glowing half-built Roblox game between them. The AI hand made of flowing light points. Creative partnership. Deep indigo background, warm glow at center. Editorial illustration. No text. 1:1 square.', iconKey:'cpu', discordMsg:'We used AI to create [what was created]. Now it\'s your turn. Try a prompt and send the result here — good, bad, or funny, everything counts.', skills:["Prompt engineering", "AI literacy", "Output evaluation"],         attract:true, pf:[1,2,2],obj:'Show AI as a creative partner — a topic with high organic reach.',fmt:'Short demo.',aud:'Teenagers curious about AI and creation.',script:[['Hook','"We asked AI to create a mission for Roblox."'],['Context','Show the prompt and result.'],['Turn','Improve the AI\'s response with human criteria.'],['CTA','"Share what you created — link in bio."']],caption:'AI helps, but the creator decides. Try a prompt and share the result.',discordAction:'Thread for prompts and improvements.',care:'Guide responsible AI use. No personal data in prompts.'},
+      {title:'Behind the Scenes', prompt:'A theatrical curtain pulled aside to reveal the messy, beautiful behind-the-scenes of a Roblox game in progress — code fragments, rough terrain blocks, a teenage creator mid-process surrounded by tools. Purple and gold tones. Making-of energy. Bold editorial illustration. No text. 1:1 square.', iconKey:'film', discordMsg:'We showed the before and after of a project. Now: do you have something in progress? Post a current version here — any stage. We\'ll give feedback.', skills:["Project management", "Documentation", "Iteration"], attract:false,pf:[1,2,2],obj:'Show the real process to those already creating.',fmt:'Behind-the-scenes video.',aud:'Members who need to see that a project evolves in stages.',script:[['Hook','"Look at how this idea started and how it turned out."'],['Context','Show the initial version and the adjusted version.'],['Turn','Explain one improvement decision.'],['CTA','"What improvement would you make? Link in bio."']],caption:'Every project improves in stages. Today we show a before and after.',discordAction:'Pedido de feedback coletivo.',care:'Ask for authorization before using a participant\'s project.'},
+      {title:'Learning from Errors', prompt:'A glowing red bug-creature transforming mid-frame into a golden lightbulb as sparks fly. Roblox-style blocks scatter and reorder around the transformation. From broken to understood. Deep purple background, warm gold at center. Playful, optimistic editorial illustration. No text. 1:1 square.', iconKey:'bug', discordMsg:'We brought up an error that happens a lot. Have you experienced this? Or do you have another bug that drives you crazy? Send it here — we\'ll try to solve it together.', skills:["Debugging", "Resilience", "Trial-and-error learning"],     attract:false,pf:[1,2,2],obj:'Treat error as part of creation — normalize the process.',fmt:'Problem and solution video.',aud:'Members who get frustrated when something goes wrong.',script:[['Hook','"This error seems silly, but it happens a lot."'],['Context','Show the problem.'],['Turn','Explain the fix simply.'],['CTA','"Which error do you want to solve? Link in bio."']],caption:'Errors teach too. Which bug got you stuck? Share it.',discordAction:'Channel for bugs and questions.',care:'Focus on the problem, not the person. No participant exposure.'}
+    ]
+  },
+  {
+    day:'Sexta', syn:'Exposure and recognition of what the community produced.',theme:'Vitrine',fn:'Reconhecer',color:'#B23A9A',
+    objective:'What the community produced. Recognition that attracts — those who see it want to be part of it.',
+    options:[
+      {title:'Best Project', prompt:'A single Roblox game world on a glowing pedestal, bathed in a dramatic spotlight from above. Dark surrounding space. Small blocky trophies orbit it like a crown. Gold and teal tones. Museum-display composition, celebration without excess. Bold editorial illustration. No text. 1:1 square.', iconKey:'trophy', discordMsg:'Project spotlight this week. Congrats to [name]! What did you find most creative about this project? Leave a comment here.', skills:["Digital portfolio", "Curation", "Project communication"],        attract:true, pf:[0,2,2],obj:'Show the outside world that this community produces.',fmt:'Highlight video or carousel.',aud:'Community and new interested people.',script:[['Hook','"Look at what the community created this week."'],['Context','Show the project and what it proposes.'],['Turn','Highlight one creative choice.'],['CTA','"See more projects — link in bio."']],caption:'Project spotlight of the week. More creations coming — follow so you don\'t miss them.',discordAction:'Pin to the board and open positive comments.',care:'Confirmar autorização de uso de imagem, nome e projeto.'},
+      {title:'Contest Results', prompt:'A scoreboard made of Roblox-style blocks, each rank glowing brighter than the last. Pixel-fragment confetti raining down. The first position radiates light. Teal background, gold and white accents. Announcement energy, clean editorial graphic. No text. 1:1 square.', iconKey:'award', skills:["Criteria-based evaluation", "Handling results", "Cycle completion"], discordMsg:'Challenge results! Thank you to everyone who participated. See the full ranking pinned here. Next week there\'s a new challenge — stay tuned.', skills:["Criteria-based evaluation", "Handling results", "Cycle completion"], attract:false,pf:[0,2,2],obj:'Close the cycle and reward those who participated.',fmt:'Results video.',aud:'Challenge participants and following audience.',script:[['Hook','"The result of this week\'s challenge is out."'],['Context','Recall the contest premise.'],['Turn','Winners and simple criteria.'],['CTA','"Check the full ranking — link in bio."']],caption:'Results of this week\'s challenge. Thank you to everyone who participated.',discordAction:'Ranking, comentários e próximo desafio.',care:'Regras claras antes do concurso. Evitar sorteio sem regulamento.'},
+      {title:'Community Spotlight', prompt:'A constellation of small glowing teenage faces connected by fine lines forming a network across a deep teal night sky. One node at the center pulses brighter than the others. Belonging, community, invisible threads made visible. Poetic and warm editorial illustration. No text. 1:1 square.', iconKey:'star', discordMsg:'Today\'s spotlight goes to [name], for [what they did]. This kind of attitude is what makes the community happen. Leave a message for this person here.', skills:["Leadership", "Collaboration", "Recognizing contribution"],attract:false,pf:[1,2,2],obj:'Reinforce belonging and show that positive behavior is recognized.',fmt:'Recognition post.',aud:'Active members and those considering joining.',script:[['Hook','"Today\'s spotlight goes to those who made the community happen."'],['Context','Explain the recognized participation.'],['Turn','Positive behavior: help, growth, collaboration.'],['CTA','"Participate — link in bio."']],caption:'Community spotlight: participation, help, and growth count too.',discordAction:'Public mention and recognition comments.',care:'Avoid exposing minors without authorization. Prefer authorized nicknames.'},
+      {title:'Next Challenge', prompt:'A glowing portal door floating open in dark space, revealing the silhouette of the next challenge inside — abstract, energetic, unknown. A teenage figure stands at the threshold. Teal and electric white light. Anticipation and forward motion. Cinematic editorial illustration. No text. 1:1 square.', iconKey:'rocket', discordMsg:'Next challenge coming. The theme is [theme hint]. The full rules are pinned in this channel. Any questions, ask here.', skills:["Planning", "Proposal communication", "Audience engagement"],       attract:true, pf:[2,1,1],obj:'Create anticipation — an attraction hook for the following week.',fmt:'Vídeo teaser.',aud:'Audience not yet in but who enjoys challenges.',script:[['Hook','"Next week there\'s a new challenge."'],['Context','Drop a hint about the theme.'],['Turn','Explain why it\'s worth participating.'],['CTA','"The rules are waiting — link in bio."']],caption:'The next challenge is on its way. Stay tuned.',discordAction:'Regulamento simples e canal de dúvidas.',care:'Define deadlines, criteria, and rules. No prize without formal rules.'}
+    ]
+  }
+];
+
+const SL={planned:'Planejado',published:'Publicado',skipped:'Pulado'};
+
+/* ════════════ STATE ════════════ */
+let wkData={
+  1:{sel:{"0":0,"1":0,"2":1,"3":0,"4":3},status:{"0":"planned","1":"planned","2":"planned","3":"planned","4":"planned"},note:''},
+  2:{sel:{"0":2,"1":1,"2":0,"3":1,"4":2},status:{"0":"planned","1":"planned","2":"planned","3":"planned","4":"planned"},note:''},
+  3:{sel:{"0":3,"1":3,"2":1,"3":3,"4":3},status:{"0":"planned","1":"planned","2":"planned","3":"planned","4":"planned"},note:''},
+  4:{sel:{"0":1,"1":2,"2":0,"3":2,"4":2},status:{"0":"planned","1":"planned","2":"planned","3":"planned","4":"planned"},note:''},
+  5:{sel:{"0":0,"1":1,"2":2,"3":1,"4":0},status:{"0":"planned","1":"planned","2":"planned","3":"planned","4":"planned"},note:''},
+  6:{sel:{"0":3,"1":3,"2":1,"3":0,"4":3},status:{"0":"planned","1":"planned","2":"planned","3":"planned","4":"planned"},note:''},
+  7:{sel:{"0":1,"1":0,"2":2,"3":3,"4":1},status:{"0":"planned","1":"planned","2":"planned","3":"planned","4":"planned"},note:''},
+  8:{sel:{"0":2,"1":2,"2":0,"3":2,"4":0},status:{"0":"planned","1":"planned","2":"planned","3":"planned","4":"planned"},note:''},
+  9:{sel:{"0":3,"1":1,"2":3,"3":1,"4":2},status:{"0":"planned","1":"planned","2":"planned","3":"planned","4":"planned"},note:''},
+  10:{sel:{"0":1,"1":3,"2":2,"3":2,"4":0},status:{"0":"planned","1":"planned","2":"planned","3":"planned","4":"planned"},note:''},
+  11:{sel:{"0":3,"1":2,"2":3,"3":3,"4":1},status:{"0":"planned","1":"planned","2":"planned","3":"planned","4":"planned"},note:''},
+  12:{sel:{"0":0,"1":1,"2":0,"3":1,"4":2},status:{"0":"planned","1":"planned","2":"planned","3":"planned","4":"planned"},note:''},
+  13:{sel:{"0":1,"1":3,"2":3,"3":2,"4":0},status:{"0":"planned","1":"planned","2":"planned","3":"planned","4":"planned"},note:''},
+};
+let drawerMode=null; // 'picker'|'detail'|'note'
+let activeCell=null; // {week, day}
+let lastFocus=null;
+const SK={w:n=>`er5_w${n}`};
+
+function getW(n){if(!wkData[n])wkData[n]={sel:{},status:{},note:''};return wkData[n]}
+function saveW(n){try{localStorage.setItem(SK.w(n),JSON.stringify(getW(n)))}catch(e){}}
+function loadAll(){
+  const VER='rblx-2026-v1';
+  if(localStorage.getItem('schedVer')!==VER){
+    // New version — wipe old data, use default schedule
+    for(let i=1;i<=13;i++) localStorage.removeItem(SK.w(i));
+    localStorage.setItem('schedVer',VER);
+    return; // keep wkData defaults
+  }
+  for(let i=1;i<=13;i++){
+    try{
+      const d=localStorage.getItem(SK.w(i));
+      if(d){const p=JSON.parse(d);if(Object.keys(p.sel||{}).length)wkData[i]=p;else if(p.note)wkData[i].note=p.note;}
+    }catch(e){}
+  }
+}
+
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function getPhase(n){return PHASES.find(p=>n>=p.r[0]&&n<=p.r[1])||PHASES[0]}
+function phaseIdx(n){return PHASES.findIndex(p=>n>=p.r[0]&&n<=p.r[1])}
+
+/* ════════════ CURRENT WEEK ════════════ */
+function currentWeekNum(){
+  // Could be config-driven; default to 1
+  return parseInt(localStorage.getItem('er5_cw')||'1');
+}
+
+/* ════════════ STATS ════════════ */
+function updateStats(){
+  let filled=0,pub=0;
+  for(let i=1;i<=13;i++){
+    const w=wkData[i];if(!w)continue;
+    Object.keys(w.sel||{}).forEach(di=>{
+      filled++;
+      if((w.status||{})[di]==='published')pub++;
+    });
+  }
+  // stats removed
+
+  // Update topbar phase (based on current week)
+  const cw=currentWeekNum();
+  const ph=getPhase(cw);
+  document.documentElement.style.setProperty('--pc',ph.color);
+  document.getElementById('brandDot').style.background=ph.color;
+  document.getElementById('phaseChip').textContent=ph.name;
+}
+
+/* ════════════ BUILD GRID ════════════ */
+function buildGrid(){
+  const grid=document.getElementById('progGrid');
+  grid.innerHTML='';
+
+  // Corner
+  const corner=document.createElement('div');
+  corner.className='col-hd-corner';
+  grid.appendChild(corner);
+
+  // Column headers
+  DAYS.forEach(day=>{
+    const hd=document.createElement('div');
+    hd.className='col-hd';
+    hd.style.setProperty('--dc',day.color);
+    hd.innerHTML=`
+      <span class="ch-day">${esc(day.day)}</span>
+      <span class="ch-theme">${esc(day.theme)} · ${esc(day.fn)}</span>
+      <span class="ch-syn">${esc(day.syn||'')}</span>`;
+    grid.appendChild(hd);
+  });
+
+  // Phase dividers + week rows
+  const cw=currentWeekNum();
+  let lastPhase=-1;
+
+  for(let w=1;w<=13;w++){
+    const phI=phaseIdx(w);
+    if(phI!==lastPhase){
+      lastPhase=phI;
+      const ph=PHASES[phI];
+      const div=document.createElement('div');
+      div.className='phase-row';
+      div.style.setProperty('--phc',ph.color);
+      div.style.borderLeft=`5px solid ${ph.color}`;
+      div.style.background=`color-mix(in srgb,${ph.color} 8%,#fff)`;
+      div.innerHTML=`
+        <span class="phase-row-name">${esc(ph.name)}</span>
+        <span class="phase-row-weeks">Weeks ${ph.r[0]}–${ph.r[1]}</span>
+        <span class="phase-row-desc">${esc(ph.desc)}</span>`;
+      grid.appendChild(div);
+    }
+
+    const isCurr=w===cw;
+    const wData=getW(w);
+
+    // Week label
+    const lbl=document.createElement('button');
+    lbl.className='week-lbl'+(isCurr?' curr':'');
+    const hasNote=!!(wData.note&&wData.note.trim());
+    lbl.innerHTML=`
+      <div class="wl-num">Semana ${w}${isCurr?'<span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--pc);margin-left:7px;vertical-align:middle"></span>':''}</div>
+      <div class="wl-note-icon ${hasNote?'has-note':''}">
+        ${hasNote?'✎ nota':'✎'}
+      </div>`;
+    lbl.addEventListener('click',()=>openNote(w));
+    grid.appendChild(lbl);
+
+    // Day cells
+    DAYS.forEach((day,di)=>{
+      const selIdx=wData.sel[di];
+      const st=wData.status[di]||'planned';
+      const filled=selIdx!=null;
+      const opt=filled?day.options[selIdx]:null;
+
+      const cell=document.createElement('button');
+      cell.className='gcell'+(filled?' gcell--filled':' gcell--empty')+(isCurr?' curr-row':'');
+      cell.style.setProperty('--dc',day.color);
+      cell.dataset.week=w;cell.dataset.day=di;
+
+      if(filled){
+        const iconSvg=(ICONS[opt.iconKey]||'').replace('stroke="currentColor"',`stroke="${day.color}"`);
+        cell.innerHTML=`
+          <div class="cell-title"><span class="cell-icon">${iconSvg}</span>${esc(opt.title)}</div>
+          <div class="cell-meta">
+            <span class="cell-status ${st}"></span>
+          </div>`;
+      }else{
+        cell.innerHTML=`<div class="cell-plus">+</div>`;
+      }
+
+      cell.addEventListener('click',()=>{
+        if(filled) openDetail(w,di);
+        else openPicker(w,di);
+      });
+
+      grid.appendChild(cell);
+    });
+  }
+}
+
+/* ════════════ DRAWER OPEN/CLOSE ════════════ */
+function openDrawer(mode,kickText,titleText,subText,dayColor){
+  lastFocus=document.activeElement;
+  drawerMode=mode;
+
+  const drawer=document.getElementById('drawer');
+  const drHd=document.getElementById('drHd');
+  const execBar=document.getElementById('execBar');
+
+  drawer.style.setProperty('--c',dayColor||'#E8472B');
+  drHd.style.setProperty('--c',dayColor||'#E8472B');
+  document.getElementById('drKick').textContent=kickText;
+  document.getElementById('drTitle').textContent=titleText;
+  document.getElementById('drSub').textContent=subText;
+
+  execBar.classList.toggle('hidden',mode!=='detail');
+
+  drawer.classList.add('open');
+  document.getElementById('backdrop').classList.add('open');
+  document.getElementById('closeDrawer').focus();
+  document.addEventListener('keydown',onEsc);
+}
+
+function closeDrawer(){
+  document.getElementById('drawer').classList.remove('open');
+  document.getElementById('backdrop').classList.remove('open');
+  document.removeEventListener('keydown',onEsc);
+  drawerMode=null;activeCell=null;
+  if(lastFocus)lastFocus.focus();
+}
+function onEsc(e){if(e.key==='Escape')closeDrawer()}
+
+/* ════════════ PICKER MODE ════════════ */
+function openPicker(w,di){
+  activeCell={week:w,day:di};
+  const day=DAYS[di];
+  const ph=getPhase(w);
+  const pIdx=phaseIdx(w);
+
+  openDrawer('picker',
+    `Semana ${w} · ${day.theme} · ${ph.name}`,
+    `Escolher ação`,
+    day.objective,
+    day.color
+  );
+
+  const body=document.getElementById('drBody');
+  body.innerHTML=`
+    <div class="picker-ctx">
+      <span class="ctx-tag">${esc(ph.name)}</span>
+      <span class="ctx-tag">Semana ${w}</span>
+    </div>
+    <div class="picker-options" id="pickerOpts"></div>`;
+
+  const opts=document.getElementById('pickerOpts');
+  day.options.forEach((opt,oi)=>{
+    const fit=opt.pf[pIdx];
+    const fitTag=fit===2?'<span class="ptag rec">Recomendada</span>':fit===0?'<span class="ptag off">Fora de fase</span>':'';
+    // Check recency
+    let recentTag='';
+    for(let pw=w-1;pw>=Math.max(1,w-4);pw--){
+      if((wkData[pw]?.sel||{})[di]===oi){
+        const ago=w-pw;
+        if(ago===1)
+          recentTag=`<span class="ptag recent-0">↩ Semana passada</span>`;
+        else if(ago<=3)
+          recentTag=`<span class="ptag recent-1">Há ${ago} semanas</span>`;
+        else
+          recentTag=`<span class="ptag recent-2">Há ${ago} semanas</span>`;
+        break;
+      }
+    }
+
+    const btn=document.createElement('button');
+    btn.className='popt';
+    btn.style.setProperty('--c',day.color);
+    btn.innerHTML=`
+      <div class="popt-title"><span class="popt-icon">${(ICONS[opt.iconKey]||'').replace('stroke="currentColor"',`stroke="${day.color}"`)}</span>${esc(opt.title)}</div>
+      <div class="popt-meta">${fitTag}${recentTag}</div>
+      <div class="popt-desc">${esc(opt.obj)}</div>`;
+
+    btn.addEventListener('click',()=>{
+      const wk=getW(w);
+      wk.sel[di]=oi;
+      if(!wk.status[di])wk.status[di]='planned';
+      saveW(w);
+      updateCell(w,di);
+      updateStats();
+      openDetail(w,di);
+    });
+    opts.appendChild(btn);
+  });
+}
+
+/* ════════════ DETAIL MODE ════════════ */
+function openDetail(w,di){
+  activeCell={week:w,day:di};
+  const day=DAYS[di];
+  const wk=getW(w);
+  const selIdx=wk.sel[di];
+  if(selIdx==null){openPicker(w,di);return}
+  const opt=day.options[selIdx];
+  const st=wk.status[di]||'planned';
+  const ph=getPhase(w);
+
+  openDrawer('detail',
+    `Semana ${w} · ${day.theme} · ${ph.name}`,
+    opt.title,
+    opt.obj,
+    day.color
+  );
+
+  // Exec buttons
+  document.querySelectorAll('.exec-btn').forEach(b=>b.classList.toggle('active',b.dataset.s===st));
+
+  const body=document.getElementById('drBody');
+  body.innerHTML=`
+    <div class="goal-strip"><b>Objective</b>${esc(opt.obj)}</div>
+
+    ${opt.skills?`<div class="detail-skills">
+      <span class="dsk-lbl">Competências</span>
+      <div class="dsk-pills">${opt.skills.map(s=>`<span class="dsk-pill">${esc(s)}</span>`).join('')}</div>
+    </div>`:''}
+
+    <section class="channel">
+      <header class="ch-hd">
+        <span class="ch-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+        <div class="ch-id"><div class="ch-name">Reach</div><div class="ch-meta">${esc(opt.fmt)}</div></div>
+        <span class="ch-tag">Social feed</span>
+      </header>
+      <div class="ch-body">
+        <div class="lane">
+          <span class="lane-lbl">Production</span>
+          <div class="field"><b>Primary audience</b>${esc(opt.aud)}</div>
+          <p class="dr-sec">Script</p>
+          <div class="script">
+            ${opt.script.map(l=>`<div class="beat"><div class="beat-lbl">${esc(l[0])}</div><div class="beat-txt">${esc(l[1])}</div></div>`).join('')}
+          </div>
+        </div>
+        <div class="lane lane--pub">
+          <div class="lane-hd">
+            <span class="lane-lbl">Publication · Caption</span>
+            <span class="ready-tag">Ready to publish</span>
+          </div>
+          <div class="caption-box">
+            <p id="captTxt">${esc(opt.caption)}</p>
+            <button class="copy-btn" id="copyBtn">Copy caption</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="channel channel--discord">
+      <header class="ch-hd">
+        <span class="ch-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span>
+        <div class="ch-id"><div class="ch-name">Discord</div><div class="ch-meta">${esc(opt.discordAction)}</div></div>
+        <span class="ch-tag">Server</span>
+      </header>
+      <div class="ch-body">
+        <div class="lane">
+          <div class="lane-hd">
+            <span class="lane-lbl">Message for the server</span>
+            <span class="ready-tag">Ready to post</span>
+          </div>
+          <div class="caption-box">
+            <p id="discordMsgTxt">${esc(opt.discordMsg||opt.discordAction)}</p>
+            <button class="copy-btn" id="copyDiscord">Copy message</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="care-section">
+      <p class="dr-sec">Caution for this action</p>
+      <div class="care-alert">
+        <span class="care-alert-icon">⚠</span>
+        <div>
+          <span class="care-alert-lbl">Attention</span>
+          <span class="care-alert-txt">${esc(opt.care)}</span>
+        </div>
+      </div>
+    </div>
+
+    ${opt.skills&&opt.skills.length?`
+    <div class="anexo-skills">
+      <p class="dr-sec">Skills</p>
+      ${opt.skills.map(s=>`
+        <div class="anexo-item">
+          <span class="anexo-name">${esc(s)}</span>
+          ${SKILL_CONTEXT[s]?`<span class="anexo-ctx">${esc(SKILL_CONTEXT[s])}</span>`:''}
+        </div>
+      `).join('')}
+    </div>`:''}
+`;
+
+  document.getElementById('copyBtn').addEventListener('click',async()=>{
+    try{await navigator.clipboard.writeText(opt.caption)}catch(e){}
+    const b=document.getElementById('copyBtn');
+    b.textContent='Copied';b.classList.add('done');
+    setTimeout(()=>{b.textContent='Copy caption';b.classList.remove('done')},1800);
+  });
+
+  document.getElementById('copyPrompt')?.addEventListener('click',function(){
+    navigator.clipboard.writeText(opt.prompt||'');
+    this.textContent='Copied';this.classList.add('done');
+    setTimeout(()=>{this.textContent='Copy prompt';this.classList.remove('done');},2000);
+  });
+  document.getElementById('copyDiscord').addEventListener('click',async()=>{
+    const msg=(opt.discordMsg||opt.discordAction).replace(/\\n/g,'\n');
+    try{await navigator.clipboard.writeText(msg)}catch(e){}
+    const b=document.getElementById('copyDiscord');
+    b.textContent='Copied';b.classList.add('done');
+    setTimeout(()=>{b.textContent='Copy message';b.classList.remove('done')},1800);
+  });
+}
+
+/* ════════════ NOTE MODE ════════════ */
+function openNote(w){
+  activeCell={week:w,day:null};
+  const wk=getW(w);
+  const ph=getPhase(w);
+
+  openDrawer('note',
+    `Week ${w} · ${ph.name}`,
+    'Community pulse',
+    'Record what happened this week.',
+    ph.color
+  );
+
+  document.getElementById('execBar').classList.add('hidden');
+
+  const body=document.getElementById('drBody');
+  body.innerHTML=`
+    <div class="note-mode">
+      <textarea id="noteTA" placeholder="New members, Discord engagement, projects submitted, what worked or not…">${esc(wk.note||'')}</textarea>
+      <button class="note-save" id="noteSaveBtn">Salvar nota</button>
+    </div>`;
+
+  document.getElementById('noteSaveBtn').addEventListener('click',()=>{
+    wk.note=document.getElementById('noteTA').value;
+    saveW(w);
+    const btn=document.getElementById('noteSaveBtn');
+    btn.textContent='Saved';btn.classList.add('saved');
+    setTimeout(()=>{btn.textContent='Save note';btn.classList.remove('saved')},1800);
+    // Refresh week label to show note indicator
+    buildGrid();
+    updateStats();
+  });
+}
+
+/* ════════════ UPDATE SINGLE CELL ════════════ */
+function updateCell(w,di){
+  const cell=document.querySelector(`.gcell[data-week="${w}"][data-day="${di}"]`);
+  if(!cell)return;
+  const wk=getW(w);
+  const selIdx=wk.sel[di];
+  const opt=DAYS[di].options[selIdx];
+  const day=DAYS[di];
+  const st=wk.status[di]||'planned';
+  const iconSvg=(ICONS[opt.iconKey]||'').replace('stroke="currentColor"',`stroke="${day.color}"`);
+  cell.className=`gcell gcell--filled${w===currentWeekNum()?' curr-row':''}`;
+  cell.style.setProperty('--dc',day.color);
+  cell.innerHTML=`
+    <div class="cell-title"><span class="cell-icon">${iconSvg}</span>${esc(opt.title)}</div>
+    <div class="cell-meta">
+      <span class="cell-status ${st}"></span>
+    </div>`;
+  cell.onclick=()=>openDetail(w,di);
+}
+
+/* ════════════ EVENTS ════════════ */
+document.getElementById('closeDrawer').addEventListener('click',closeDrawer);
+document.getElementById('backdrop').addEventListener('click',closeDrawer);
+
+document.querySelectorAll('.exec-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    if(!activeCell||activeCell.day===null)return;
+    const {week:w,day:di}=activeCell;
+    const st=btn.dataset.s;
+    getW(w).status[di]=st;saveW(w);
+    document.querySelectorAll('.exec-btn').forEach(b=>b.classList.toggle('active',b.dataset.s===st));
+    // Update cell dot
+    const cell=document.querySelector(`.gcell[data-week="${w}"][data-day="${di}"]`);
+    if(cell){const dot=cell.querySelector('.cell-status');if(dot)dot.className=`cell-status ${st}`}
+    updateStats();
+  });
+});
+
+document.getElementById('changeBtn').addEventListener('click',()=>{
+  if(activeCell)openPicker(activeCell.week,activeCell.day);
+});
+
+document.getElementById('removeBtn').addEventListener('click',()=>{
+  if(!activeCell||activeCell.day===null)return;
+  const {week:w,day:di}=activeCell;
+  const wk=getW(w);
+  delete wk.sel[di];
+  delete wk.status[di];
+  saveW(w);
+  // Restore cell to empty
+  const cell=document.querySelector(`.gcell[data-week="${w}"][data-day="${di}"]`);
+  if(cell){
+    const isCurr=w===currentWeekNum();
+    cell.className=`gcell gcell--empty${isCurr?' curr-row':''}`;
+    cell.innerHTML=`<div class="cell-plus">+</div>`;
+    cell.onclick=()=>openPicker(w,di);
+  }
+  updateStats();
+  closeDrawer();
+});
+
+/* ════════════ INIT ════════════ */
+loadAll();
+prepopulate();
+buildGrid();
+updateStats();
+</script>
+</body>
+</html>
