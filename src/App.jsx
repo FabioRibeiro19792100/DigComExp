@@ -9,6 +9,20 @@ import { PLAN_SLUG, hasSupabase, loadRemotePlanState, saveRemotePlanState } from
 import { loadLocalPlanState, saveLocalPlanState } from "./lib/storage.js";
 
 const APP_OVERRIDES = `
+@media(min-width:961px){
+  .topbar,.prog-hd,.prog-wrap{
+    padding-left:88px;
+    padding-right:88px;
+  }
+}
+
+@media(min-width:1280px){
+  .topbar,.prog-hd,.prog-wrap{
+    padding-left:104px;
+    padding-right:104px;
+  }
+}
+
 .topbar{
   gap:14px;
   justify-content:space-between;
@@ -89,6 +103,22 @@ const APP_OVERRIDES = `
 
 .gcell{
   min-height:112px;
+}
+
+.gcell.phase-start{
+  border-top-color:transparent!important;
+}
+
+@media(min-width:721px){
+  .prog-grid{
+    column-gap:6px;
+    background:#fff;
+  }
+
+  .week-lbl{
+    justify-content:flex-start;
+    padding-top:26px;
+  }
 }
 
 .cell-title{
@@ -319,29 +349,28 @@ const APP_OVERRIDES = `
   .mobile-day-name{
     display:block;
     font-family:var(--mono);
-    font-size:10px;
+    font-size:9px;
     letter-spacing:.1em;
     text-transform:uppercase;
     color:var(--faint);
+    opacity:.8;
   }
 
   .mobile-day-theme{
-    display:block;
-    margin-top:4px;
-    font-family:var(--display);
-    font-weight:600;
-    font-size:14px;
-    color:var(--ink);
+    display:none;
   }
 
   .mobile-day-action{
-    font-size:13px;
-    line-height:1.4;
+    font-family:var(--display);
+    font-size:16px;
+    font-weight:700;
+    letter-spacing:-.02em;
+    line-height:1.18;
     color:var(--ink);
   }
 
   .mobile-day-empty{
-    font-size:13px;
+    font-size:12px;
     line-height:1.45;
     color:var(--muted);
   }
@@ -395,6 +424,14 @@ const APP_OVERRIDES = `
 
   .prog-title{
     line-height:1.06;
+  }
+
+  .mobile-day-card{
+    padding:13px 13px 12px;
+  }
+
+  .mobile-day-action{
+    font-size:15px;
   }
 
   .prog-grid{
@@ -918,6 +955,7 @@ function App() {
                     hasOption ? openDetail(week, dayIndex) : openPicker(week, dayIndex)
                   }
                   days={days}
+                  firstWeekOfPhase={phase.r[0] === week}
                   isCurrent={isCurrent}
                   note={note}
                   onOpenNote={() => openNote(week)}
@@ -1069,6 +1107,7 @@ function FragmentRows({
   currentWeek,
   dayAction,
   days,
+  firstWeekOfPhase,
   isCurrent,
   note,
   onOpenNote,
@@ -1085,7 +1124,6 @@ function FragmentRows({
           className="phase-row"
           style={{
             "--phc": phase.color,
-            borderLeft: `2px solid color-mix(in srgb, ${phase.color} 58%, transparent)`,
             background: `linear-gradient(180deg, color-mix(in srgb, ${phase.color} 6%, #fff), #fff 78%)`,
           }}
         >
@@ -1125,7 +1163,7 @@ function FragmentRows({
         return (
           <button
             key={`${week}-${day.day}`}
-            className={`gcell ${option ? "gcell--filled" : "gcell--empty"} ${week === currentWeek ? "curr-row" : ""}`}
+            className={`gcell ${option ? "gcell--filled" : "gcell--empty"} ${week === currentWeek ? "curr-row" : ""} ${firstWeekOfPhase ? "phase-start" : ""}`}
             style={{ "--dc": day.color }}
             onClick={() => dayAction(dayIndex, Boolean(option))}
           >
