@@ -8,6 +8,250 @@ import { getLocaleBundle } from "./lib/i18n.js";
 import { PLAN_SLUG, hasSupabase, loadRemotePlanState, saveRemotePlanState } from "./lib/supabase.js";
 import { loadLocalPlanState, saveLocalPlanState } from "./lib/storage.js";
 
+const APP_OVERRIDES = `
+.topbar{
+  gap:14px;
+  justify-content:space-between;
+}
+
+.topbar-inner{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  min-width:0;
+  width:100%;
+}
+
+.topbar-actions{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-left:auto;
+  flex-shrink:0;
+}
+
+.locale-switcher{
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+
+.brand{
+  min-width:0;
+}
+
+.brand-logo{
+  height:26px;
+  width:auto;
+  opacity:.82;
+  filter:saturate(.92);
+  flex-shrink:0;
+}
+
+.prog-hd{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.prog-head-main{
+  min-width:0;
+}
+
+.prog-head-side{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  flex-shrink:0;
+}
+
+.prog-logo{
+  width:136px;
+  max-width:24vw;
+  height:auto;
+  opacity:.24;
+  filter:grayscale(.08);
+}
+
+.prog-wrap{
+  -webkit-overflow-scrolling:touch;
+}
+
+.prog-grid{
+  min-width:880px;
+}
+
+.gcell{
+  min-height:112px;
+}
+
+.cell-title{
+  align-items:flex-start;
+}
+
+.cell-title .cell-icon{
+  margin-top:0;
+}
+
+@media(max-width:960px){
+  .topbar{
+    height:auto;
+    min-height:54px;
+    padding-top:10px;
+    padding-bottom:10px;
+  }
+
+  .topbar-inner{
+    flex-wrap:wrap;
+    align-items:flex-start;
+  }
+
+  .topbar-actions{
+    width:100%;
+    justify-content:space-between;
+    margin-left:0;
+  }
+
+  .prog-hd{
+    align-items:flex-start;
+  }
+
+  .prog-logo{
+    width:110px;
+    max-width:30vw;
+  }
+}
+
+@media(max-width:720px){
+  .topbar,.prog-hd,.prog-wrap{
+    padding-left:16px;
+    padding-right:16px;
+  }
+
+  .topbar{
+    position:static;
+  }
+
+  .brand{
+    font-size:12px;
+    line-height:1.3;
+    max-width:calc(100% - 44px);
+  }
+
+  .brand-logo{
+    height:22px;
+  }
+
+  .topbar-actions{
+    gap:8px;
+    align-items:center;
+  }
+
+  .phase-chip{
+    padding:5px 10px;
+  }
+
+  .locale-switcher{
+    gap:5px;
+  }
+
+  .exec-btn,.change-btn,.remove-btn{
+    padding:6px 10px;
+  }
+
+  .prog-hd{
+    padding-top:22px;
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .prog-head-side{
+    width:100%;
+    justify-content:flex-start;
+  }
+
+  .prog-logo{
+    width:96px;
+    max-width:none;
+    opacity:.18;
+  }
+
+  .prog-grid{
+    min-width:700px;
+  }
+
+  .col-hd{
+    padding:14px 12px;
+  }
+
+  .gcell{
+    min-height:96px;
+    padding:14px 12px;
+  }
+
+  .cell-title{
+    font-size:12.5px;
+  }
+
+  .drawer{
+    width:100%;
+  }
+
+  .dr-hd,.exec-bar,.dr-body{
+    padding-left:18px;
+    padding-right:18px;
+  }
+
+  .exec-bar{
+    flex-wrap:wrap;
+    row-gap:8px;
+  }
+
+  .exec-actions{
+    width:100%;
+    margin-left:0;
+    justify-content:flex-end;
+  }
+}
+
+@media(max-width:480px){
+  .brand-logo{
+    height:20px;
+  }
+
+  .brand{
+    font-size:11px;
+  }
+
+  .phase-chip{
+    font-size:9px;
+  }
+
+  .prog-title{
+    line-height:1.06;
+  }
+
+  .prog-grid{
+    min-width:640px;
+  }
+
+  .phase-row{
+    padding:22px 14px 16px;
+  }
+
+  .week-lbl{
+    padding:12px 10px;
+  }
+
+  .gcell{
+    min-height:88px;
+    padding:12px 10px;
+  }
+}
+`;
+
 function cloneWeekData(source) {
   return JSON.parse(JSON.stringify(source));
 }
@@ -444,37 +688,56 @@ function App() {
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: originalStyles }} />
+      <style dangerouslySetInnerHTML={{ __html: APP_OVERRIDES }} />
       <div style={{ "--pc": currentPhase.color }}>
         <div className="topbar">
-          <div className="brand">
-            <span className="brand-dot" style={{ background: currentPhase.color }} />
-            {ui.brand}
-          </div>
-          <span className="phase-chip" style={{ color: currentPhase.color }}>
-            {currentPhase.name}
-          </span>
-          <div style={{ display: "flex", gap: 6, marginLeft: 12 }}>
-            {["pt", "en"].map((nextLocale) => (
-              <button
-                key={nextLocale}
-                type="button"
-                className="exec-btn"
-                style={{
-                  color: locale === nextLocale ? currentPhase.color : "var(--muted)",
-                  borderColor: locale === nextLocale ? currentPhase.color : "rgba(255,255,255,.15)",
-                  background: locale === nextLocale ? "rgba(255,255,255,.08)" : "transparent",
-                }}
-                onClick={() => setLocale(nextLocale)}
-              >
-                {getLocaleBundle(nextLocale).ui.localeLabel}
-              </button>
-            ))}
+          <div className="topbar-inner">
+            <div className="brand">
+              <span className="brand-dot" style={{ background: currentPhase.color }} />
+              {ui.brand}
+            </div>
+            <div className="topbar-actions">
+              <img
+                src="/expedicao-roblox-logo.png"
+                alt="Expedição Roblox"
+                className="brand-logo"
+              />
+              <span className="phase-chip" style={{ color: currentPhase.color }}>
+                {currentPhase.name}
+              </span>
+              <div className="locale-switcher">
+                {["pt", "en"].map((nextLocale) => (
+                  <button
+                    key={nextLocale}
+                    type="button"
+                    className="exec-btn"
+                    style={{
+                      color: locale === nextLocale ? currentPhase.color : "var(--muted)",
+                      borderColor: locale === nextLocale ? currentPhase.color : "rgba(255,255,255,.15)",
+                      background: locale === nextLocale ? "rgba(255,255,255,.08)" : "transparent",
+                    }}
+                    onClick={() => setLocale(nextLocale)}
+                  >
+                    {getLocaleBundle(nextLocale).ui.localeLabel}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
 
         <div className="prog-hd">
-          <p className="prog-eyebrow">{ui.eyebrow}</p>
-          <h1 className="prog-title">{ui.title}</h1>
+          <div className="prog-head-main">
+            <p className="prog-eyebrow">{ui.eyebrow}</p>
+            <h1 className="prog-title">{ui.title}</h1>
+          </div>
+          <div className="prog-head-side" aria-hidden="true">
+            <img
+              src="/expedicao-roblox-logo.png"
+              alt=""
+              className="prog-logo"
+            />
+          </div>
         </div>
 
         <div className="prog-wrap">
